@@ -111,8 +111,8 @@ RUN set -eux; \
     make install; \
     # remove profiling support to save space
     find "/opt/ghc/$GHC/" \( -name "*_p.a" -o -name "*.p_hi" \) -type f -delete; \
-    # remove some docs
-    rm -rf "/opt/ghc/$GHC/share/"; \
+    # remove some docs, but preserve licenses
+    find "/opt/ghc/$GHC/share" -not \( -iname 'license*' -or -iname 'copying*' \) -delete \
     \
     rm -rf /tmp/*; \
     \
